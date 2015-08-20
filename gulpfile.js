@@ -2,11 +2,14 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
+var rev = require('gulp-rev');
+var inject = require('gulp-inject');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var del = require('del');
 
 gulp.task('build', function () {
-  browserify({
+  var jsStream = browserify({
     entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
     debug: true
@@ -16,10 +19,18 @@ gulp.task('build', function () {
   .pipe(source('bundle.js'))
   .pipe(buffer())
   .pipe(uglify())
-  .pipe(gulp.dest('dist'));
+  .pipe(rev())
+  .pipe(gulp.dest('dist/js'));
 
-  gulp.src('client/**/*.html')
-    .pipe(gulp.dest('dist'));
+  return gulp.src('client/index.html')
+    .pipe(inject(jsStream, {ignorePath: 'dist'}))
+    .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['build']);
+gulp.task('clean', function () {
+  del([
+    'dist'
+  ]);
+});
+
+gulp.task('default', ['clean', 'build']);
