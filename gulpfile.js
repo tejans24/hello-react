@@ -7,7 +7,7 @@ var buffer = require('vinyl-buffer');
 
 gulp.task('build', function () {
   browserify({
-    entries: 'client/js/index.jsx',
+    entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
     debug: true
   })
