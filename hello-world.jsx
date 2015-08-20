@@ -1,5 +1,16 @@
 import React from 'react';
 
+class Button extends React.Component {
+  handleClick() {
+    this.props.onClick()
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick.bind(this)}>Roll Again</button>
+    )
+  }
+}
+
 class HelloWorld extends React.Component {
   constructor(props) {
     super(props)
@@ -18,7 +29,7 @@ class HelloWorld extends React.Component {
     return (
       <div>
         <p>Your roll was: {this.state.num}</p>
-        <button onClick={this.roll.bind(this)}>Roll Again</button>
+        <Button onClick={this.roll.bind(this)}/>
       </div>
     )
   }
