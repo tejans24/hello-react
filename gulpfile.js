@@ -23,7 +23,12 @@ gulp.task('build', function () {
   .pipe(gulp.dest('dist/js'));
 
   return gulp.src('client/index.html')
-    .pipe(inject(jsStream, {ignorePath: 'dist'}))
+    .pipe(inject(jsStream, {
+      ignorePath: 'dist',
+      transform: function(filepath) {
+        return '<script src="' + filepath + '" async></script>';
+      }
+    }))
     .pipe(gulp.dest('dist'))
 });
 
