@@ -7,7 +7,7 @@ var buffer = require('vinyl-buffer');
 
 gulp.task('build', function () {
   browserify({
-    entries: 'index.jsx',
+    entries: 'client/js/index.jsx',
     extensions: ['.jsx'],
     debug: true
   })
@@ -17,6 +17,9 @@ gulp.task('build', function () {
   .pipe(buffer())
   .pipe(uglify())
   .pipe(gulp.dest('dist'));
+
+  gulp.src('client/**/*.html')
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', ['build']);
