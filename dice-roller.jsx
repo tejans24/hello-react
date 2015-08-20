@@ -11,6 +11,14 @@ class Button extends React.Component {
   }
 }
 
+class Info extends React.Component {
+  render() {
+    return (
+      <p>Your roll was: {this.props.num}</p>
+    )
+  }
+}
+
 class DiceRoller extends React.Component {
   constructor(props) {
     super(props)
@@ -25,7 +33,7 @@ class DiceRoller extends React.Component {
   render() {
     return (
       <div>
-        <p>Your roll was: {this.state.num}</p>
+        <Info num={this.state.num}/>
         <Button onClick={this.roll.bind(this)}/>
       </div>
     )
