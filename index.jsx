@@ -1,7 +1,7 @@
 import React from 'react';
-import HelloWorld from './hello-world';
+import DiceRoller from './dice-roller';
 
 React.render(
-  <HelloWorld />,
+  <DiceRoller />,
   document.body
 );

@@ -11,20 +11,17 @@ class Button extends React.Component {
   }
 }
 
-class HelloWorld extends React.Component {
+class DiceRoller extends React.Component {
   constructor(props) {
     super(props)
     this.state = { num: this.getRandomNumber() }
   }
-
   getRandomNumber() {
     return Math.ceil(Math.random() * 6);
   }
-
   roll() {
     this.setState({ num: this.getRandomNumber() })
   }
-
   render() {
     return (
       <div>
@@ -35,4 +32,4 @@ class HelloWorld extends React.Component {
   }
 };
 
-export default HelloWorld;
+export default DiceRoller;
