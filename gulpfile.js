@@ -5,6 +5,8 @@ var gulpif = require('gulp-if');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var del = require('del');
+var nodemon = require('gulp-nodemon');
+var browserSync = require('browser-sync');
 
 // css
 var stylus = require('gulp-stylus');
@@ -17,7 +19,7 @@ var uglify = require('gulp-uglify');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-gulp.task('build', function () {
+gulp.task('build', ['clean'], function () {
   var jsStream = browserify({
     entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
@@ -56,10 +58,32 @@ gulp.task('build', function () {
     .pipe(gulp.dest('dist'))
 });
 
+gulp.task('serve', ['default'], function (cb) {
+  browserSync.init(null, {
+    proxy: "http://localhost:7000/",
+    port: 4000,
+    open: false
+  });
+  gulp.watch('client/**/*.styl', ['build', browserSync.reload]);
+  gulp.watch('client/**/*.jsx', ['build', browserSync.reload]);
+
+  var called = false;
+  return nodemon({
+      script: 'index.js',
+      ignore: ['./node_modules/**']
+    })
+    .on('start', function onStart() {
+      if (!called) {
+        cb();
+      }
+      called = true;
+    });
+});
+
 gulp.task('clean', function () {
   del([
     'dist'
   ]);
 });
 
-gulp.task('default', ['clean', 'build']);
+gulp.task('default', ['build']);
