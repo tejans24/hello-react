@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
-var beautify = require('gulp-beautify');
 var rev = require('gulp-rev');
 var inject = require('gulp-inject');
 var gulpif = require('gulp-if');
