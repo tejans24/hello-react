@@ -9,7 +9,6 @@ var del = require('del');
 // css
 var stylus = require('gulp-stylus');
 var minifyCss = require('gulp-minify-css');
-var gzip = require('gulp-gzip');
 
 // javascript
 var browserify = require('browserify');
