@@ -10,7 +10,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var del = require('del');
 
-process.env.NODE_ENV = process.env.NODE_ENV || ''
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 gulp.task('build', function () {
   var jsStream = browserify({
