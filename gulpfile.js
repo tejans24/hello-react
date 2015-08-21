@@ -19,7 +19,7 @@ var uglify = require('gulp-uglify');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean'], function() {
   var jsStream = browserify({
     entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
@@ -80,7 +80,7 @@ gulp.task('serve', ['default'], function (cb) {
     });
 });
 
-gulp.task('clean', function () {
+gulp.task('clean', function() {
   del([
     'dist'
   ]);
