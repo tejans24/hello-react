@@ -1,14 +1,20 @@
 var gulp = require('gulp');
-var stylus = require('gulp-stylus');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
 var inject = require('gulp-inject');
 var gulpif = require('gulp-if');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var del = require('del');
+
+// css
+var stylus = require('gulp-stylus');
+var minifyCss = require('gulp-minify-css');
+var gzip = require('gulp-gzip');
+
+// javascript
+var browserify = require('browserify');
+var babelify = require('babelify');
+var uglify = require('gulp-uglify');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -34,6 +40,8 @@ gulp.task('build', function () {
 
   var cssStream = gulp.src('client/stylus/**/*.styl')
     .pipe(stylus())
+    .pipe(gulpif((process.env.NODE_ENV == 'production'), minifyCss()))
+    .pipe(gulpif((process.env.NODE_ENV == 'production'), rev()))
     .pipe(gulp.dest('dist/css'));
 
   return gulp.src('client/index.html')
