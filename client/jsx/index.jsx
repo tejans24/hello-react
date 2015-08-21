@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { render } from 'react';
 import DiceRoller from './dice-roller';
 
 React.render(
