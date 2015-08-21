@@ -55,14 +55,15 @@ gulp.task('build', ['clean', 'lint'], function() {
     .pipe(gulpif((process.env.NODE_ENV == 'production'), rev()))
     .pipe(gulp.dest('dist/css'));
 
-  return gulp.src('client/index.html')
+  return gulp.src('client/index.jade')
     .pipe(inject(cssStream, {
+      transform: inject.transform.jade,
       ignorePath: 'dist'
     }))
     .pipe(inject(jsStream, {
       ignorePath: 'dist',
       transform: function(filepath) {
-        return '<script src="' + filepath + '" async></script>';
+        return 'script(src="' + filepath + '" async)'
       }
     }))
     .pipe(gulp.dest('dist'))
