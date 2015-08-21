@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var stylus = require('gulp-stylus');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
@@ -31,7 +32,14 @@ gulp.task('build', function () {
   .pipe(gulpif((process.env.NODE_ENV == 'production'), rev()))
   .pipe(gulp.dest('dist/js'));
 
+  var cssStream = gulp.src('client/stylus/**/*.styl')
+    .pipe(stylus())
+    .pipe(gulp.dest('dist/css'));
+
   return gulp.src('client/index.html')
+    .pipe(inject(cssStream, {
+      ignorePath: 'dist'
+    }))
     .pipe(inject(jsStream, {
       ignorePath: 'dist',
       transform: function(filepath) {
