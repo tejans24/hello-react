@@ -1,7 +1,7 @@
-import React, { render } from 'react';
-import DiceRoller from './dice-roller';
+import React from 'react';
+import App from './app';
 
 React.render(
-  <DiceRoller />,
+  <App />,
   document.body
 );
