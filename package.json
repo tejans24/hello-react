@@ -17,6 +17,8 @@
     "browserify": "^11.0.1",
     "del": "^1.2.1",
     "gulp": "^3.9.0",
+    "gulp-beautify": "https://github.com/sent1nel/gulp-beautify.git",
+    "gulp-if": "^1.2.5",
     "gulp-inject": "^1.5.0",
     "gulp-rev": "^5.1.0",
     "gulp-usemin": "^0.3.11",
