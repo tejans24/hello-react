@@ -16,10 +16,20 @@ var minifyCss = require('gulp-minify-css');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
+var eslint = require('gulp-eslint');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-gulp.task('build', ['clean'], function() {
+gulp.task('lint', function() {
+  return gulp.src([
+    'gulpfile.js',
+    'server/**/*.js'
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format());
+});
+
+gulp.task('build', ['clean', 'lint'], function() {
   var jsStream = browserify({
     entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
