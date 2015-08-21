@@ -69,7 +69,7 @@ gulp.task('serve', ['default'], function (cb) {
 
   var called = false;
   return nodemon({
-      script: 'index.js',
+      script: 'server/app.js',
       ignore: ['./node_modules/**']
     })
     .on('start', function onStart() {

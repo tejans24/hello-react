@@ -14,7 +14,7 @@ class Button extends React.Component {
 class Info extends React.Component {
   render() {
     return (
-      <p>Your roll was: {this.props.num}</p>
+      <p>Your roll was: {this.props.num}!</p>
     )
   }
 }
