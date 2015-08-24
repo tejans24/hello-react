@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
+    "jade": "^1.11.0",
     "react": "^0.13.3"
   },
   "devDependencies": {

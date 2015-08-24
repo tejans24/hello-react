@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var rev = require('gulp-rev');
-var inject = require('gulp-inject');
 var gulpif = require('gulp-if');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -29,8 +27,8 @@ gulp.task('lint', function() {
   .pipe(eslint.format());
 });
 
-gulp.task('build', ['clean', 'lint'], function() {
-  var jsStream = browserify({
+gulp.task('browserify', function() {
+  return browserify({
     entries: 'client/jsx/index.jsx',
     extensions: ['.jsx'],
     debug: true
@@ -46,30 +44,19 @@ gulp.task('build', ['clean', 'lint'], function() {
   )
   .pipe(gulpif((process.env.NODE_ENV == 'production'), buffer()))
   .pipe(gulpif((process.env.NODE_ENV == 'production'), uglify()))
-  .pipe(gulpif((process.env.NODE_ENV == 'production'), rev()))
   .pipe(gulp.dest('dist/js'));
-
-  var cssStream = gulp.src('client/stylus/**/*.styl')
-    .pipe(stylus())
-    .pipe(gulpif((process.env.NODE_ENV == 'production'), minifyCss()))
-    .pipe(gulpif((process.env.NODE_ENV == 'production'), rev()))
-    .pipe(gulp.dest('dist/css'));
-
-  return gulp.src('client/index.jade')
-    .pipe(inject(cssStream, {
-      transform: inject.transform.jade,
-      ignorePath: 'dist'
-    }))
-    .pipe(inject(jsStream, {
-      ignorePath: 'dist',
-      transform: function(filepath) {
-        return 'script(src="' + filepath + '" async)'
-      }
-    }))
-    .pipe(gulp.dest('dist'))
 });
 
-gulp.task('serve', ['default'], function (cb) {
+gulp.task('stylus', function() {
+  return gulp.src('client/stylus/**/*.styl')
+    .pipe(stylus())
+    .pipe(gulpif((process.env.NODE_ENV == 'production'), minifyCss()))
+    .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('build', ['lint', 'browserify', 'stylus']);
+
+gulp.task('serve', ['build'], function (cb) {
   browserSync.init(null, {
     proxy: "http://localhost:7000/",
     port: 4000,
