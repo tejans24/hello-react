@@ -1,11 +1,19 @@
 import React from 'react';
-import DiceRoller from './dice-roller';
+import Router from 'react-router';
+var Link = Router.Link;
+var RouteHandler = Router.RouteHandler;
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <DiceRoller />
+        <header>
+          <ul>
+            <li><Link to="app">Dashboard</Link></li>
+            <li><Link to="other">Other</Link></li>
+          </ul>
+        </header>
+        <RouteHandler />
       </div>
     )
   }
