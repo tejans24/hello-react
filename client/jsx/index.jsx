@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './app';
+import App from './handlers/app';
 import Dashboard from './handlers/dashboard';
 import Other from './handlers/other';
 
