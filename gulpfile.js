@@ -5,6 +5,7 @@ var buffer = require('vinyl-buffer');
 var del = require('del');
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
+var through2 = require('through2');
 
 // css
 var stylus = require('gulp-stylus');
@@ -28,23 +29,34 @@ gulp.task('lint', function() {
 });
 
 gulp.task('browserify', function() {
-  return browserify({
-    entries: 'client/jsx/index.jsx',
-    extensions: ['.jsx'],
-    debug: true
-  })
-  .transform(babelify)
-  .bundle()
-  .pipe(
-      gulpif(
-        (process.env.NODE_ENV == 'production'),
-        source('bundle.min.js'),
-        source('bundle.js')
-      )
-  )
-  .pipe(gulpif((process.env.NODE_ENV == 'production'), buffer()))
-  .pipe(gulpif((process.env.NODE_ENV == 'production'), uglify()))
-  .pipe(gulp.dest('dist/js'));
+  return gulp.src('client/jsx/index.jsx')
+    .pipe(through2.obj(function(file, enc, next) {
+      browserify({
+        entries: file.path,
+        extensions: ['.jsx'],
+        debug: process.env.NODE_ENV === 'development'
+      })
+      .transform(babelify)
+      .bundle(function(err, res) {
+        if (err) { return next(err); }
+        file.contents = res;
+        next(null, file);
+      });
+    }))
+    .on('error', function(error) {
+      console.log(error.stack);
+      this.emit('end');
+    })
+    .pipe(
+        gulpif(
+          (process.env.NODE_ENV == 'production'),
+          require('gulp-rename')('bundle.min.js'),
+          require('gulp-rename')('bundle.js')
+        )
+    )
+    .pipe(gulpif((process.env.NODE_ENV == 'production'), buffer()))
+    .pipe(gulpif((process.env.NODE_ENV == 'production'), uglify()))
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('stylus', function() {
