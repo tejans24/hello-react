@@ -1,8 +1,10 @@
 # Hello React
 
-> Are you interested in ES6 and Facebook's React, a library for building user interfaces? Are you confused by babel and browserify, and don't know how to get started? This project is here to help get you started in the right direction.
+> Are you interested in ES6 and React, Facebook's library for building user interfaces? Are you confused by babel and browserify, or just don't have the time to invest in setting up a Gulp build pipeline?
 
-Hello React is an application skeleton that provides the tools necessary to get started with ES6 and Facebook's React library quickly and painlessly. We put together this framework because we are starting to build single-page applications that require knowledge of other parts of the app. Backbone requires a lot of wiring code, has an event system can get out of hand, and, most importantly, can become slow due to it having to re-render entire views when the application state changes. Angular's syntax makes our eyes bleed.
+Hello React is an application skeleton that provides developers with the tools necessary to get started with ES6 and Facebook's React library quickly and painlessly.
+
+We put together this framework because we are starting to build single-page applications that require knowledge of other parts of the app. Backbone requires a lot of wiring code, has an event system can get out of hand, and, most importantly, can become slow due to it having to re-render entire views when the application state changes. Angular is great for data-heavy RESTful applications, but its uses as a UI framework leave plenty to be desired.
 
 ### How do I use this skeleton?
 
