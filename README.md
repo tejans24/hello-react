@@ -4,7 +4,7 @@
 
 Hello React is an application skeleton that provides developers with the tools necessary to get started with ES6 and Facebook's React library quickly and painlessly.
 
-We put together this framework because we are starting to build single-page applications that require knowledge of other parts of the app. Backbone requires a lot of wiring code, has an event system can get out of hand, and, most importantly, can become slow due to it having to re-render entire views when the application state changes. Angular is great for data-heavy RESTful applications, but its uses as a UI framework leave plenty to be desired.
+We put together this framework because we are starting to build single-page applications that require knowledge of other parts of the app. Backbone requires a lot of wiring code, has an event system that can get out of hand, and, most importantly, can become slow due to it having to re-render entire views when the application state changes. Angular is great for data-heavy RESTful applications, but its uses as a UI framework leave plenty to be desired.
 
 ### How do I use this skeleton?
 
