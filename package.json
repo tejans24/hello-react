@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "express-react-views": "^0.8.2",
     "jade": "^1.11.0",
     "react": "^0.13.3"
   },
@@ -30,9 +29,7 @@
     "gulp-stylus": "^2.0.6",
     "gulp-uglify": "^1.2.0",
     "gulp-usemin": "^0.3.11",
-    "react-redux": "^1.0.1",
     "react-router": "^0.13.3",
-    "redux": "^1.0.1",
     "through2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

@@ -1,5 +1,5 @@
 import React from 'react';
-import DiceRoller from '../containers/dice-roller';
+import DiceRoller from '../components/dice-roller';
 
 class Dashboard extends React.Component {
   render() {

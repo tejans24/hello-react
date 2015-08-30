@@ -20,11 +20,21 @@ class Info extends React.Component {
 }
 
 class DiceRoller extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { num: this.getRandomNumber() }
+  }
+  getRandomNumber() {
+    return Math.ceil(Math.random() * 6);
+  }
+  roll() {
+    this.setState({ num: this.getRandomNumber() })
+  }
   render() {
     return (
       <div>
-        <Info num={this.props.num}/>
-        <Button onClick={this.props.onRoll}/>
+        <Info num={this.state.num}/>
+        <Button onClick={this.roll.bind(this)}/>
       </div>
     )
   }

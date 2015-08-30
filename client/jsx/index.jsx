@@ -1,19 +1,19 @@
 import React from 'react';
+import App from './handlers/app';
+import Dashboard from './handlers/dashboard';
+import Other from './handlers/other';
 
-import DiceRoller from './components/dice-roller';
+import Router from 'react-router';
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
 
-class Index extends React.Component {
-  render() {
-    return (
-      <html>
-        <head>
-          <script src="/js/bundle.js" async></script>
-        </head>
-        <body>
-        </body>
-      </html>
-    )
-  }
-}
+var routes = (
+  <Route name="app" path="/" handler={App}>
+    <DefaultRoute handler={Dashboard}/>
+    <Route name="other" path="/other" handler={Other}/>
+  </Route>
+)
 
-export default Index;
+Router.run(routes, function(Handler) {
+  React.render(<Handler/>, document.body);
+});
