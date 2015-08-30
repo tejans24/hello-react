@@ -29,11 +29,11 @@ gulp.task('lint', function() {
 });
 
 gulp.task('browserify', function() {
-  return gulp.src('client/jsx/index.jsx')
+  return gulp.src('client/jsx/client/index.jsx')
     .pipe(through2.obj(function(file, enc, next) {
       browserify({
         entries: file.path,
-        extensions: ['.jsx'],
+        extensions: ['.jsx', '.js'],
         debug: process.env.NODE_ENV === 'development'
       })
       .transform(babelify)
